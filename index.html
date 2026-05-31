@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>深渊圣约 · 世界观设定</title>
+<style>
+:root {
+  --bg: #0d0d0f;
+  --surface: #1a1a1f;
+  --surface2: #222228;
+  --border: #2a2a33;
+  --text: #c8c8d0;
+  --text-dim: #787887;
+  --text-bright: #e8e8f0;
+  --gold: #c9a84c;
+  --gold-dim: #7a6020;
+  --amber: #e8b830;
+  --red: #8b3a3a;
+  --red-dim: #3a1a1a;
+  --accent: #4a6a8a;
+  --radius: 6px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { font-size:16px; -webkit-text-size-adjust:100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.75;
+  min-height: 100dvh;
+}
+
+/* ── Header ── */
+header {
+  position: sticky; top:0; z-index:10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display:flex; align-items:center; gap:12px;
+}
+header .logo { font-size:1.1rem; font-weight:700; color:var(--gold); white-space:nowrap; }
+header .sub { font-size:0.78rem; color:var(--text-dim); flex:1; }
+header button {
+  background: var(--surface2); border:1px solid var(--border); color:var(--text);
+  padding: 6px 12px; border-radius:var(--radius); font-size:0.8rem; cursor:pointer;
+  white-space:nowrap; min-height:36px;
+}
+header button:active { background:var(--border); }
+
+/* ── Layout ── */
+.layout { display:flex; max-width:1100px; margin:0 auto; }
+main { flex:1; min-width:0; padding:16px 16px 80px; }
+aside { display:none; }
+
+@media (min-width:860px) {
+  aside { display:block; width:220px; flex-shrink:0; position:sticky; top:56px; height:calc(100dvh - 56px); overflow-y:auto; padding:16px 12px; border-right:1px solid var(--border); }
+  aside nav a { display:block; padding:6px 10px; color:var(--text-dim); text-decoration:none; font-size:0.82rem; border-radius:var(--radius); margin-bottom:1px; }
+  aside nav a:hover, aside nav a.active { color:var(--gold); background:var(--surface); }
+  aside nav .nav-h2 { padding-left:18px; font-size:0.76rem; }
+  main { padding:20px 28px 100px; }
+}
+
+/* ── Sections ── */
+section { margin-bottom:36px; }
+h1 { font-size:1.5rem; color:var(--gold); margin-bottom:4px; letter-spacing:0.03em; }
+h2 { font-size:1.15rem; color:var(--amber); margin:24px 0 10px; padding-top:12px; }
+h3 { font-size:1rem; color:var(--text-bright); margin:16px 0 8px; }
+p { margin:8px 0; font-size:0.95rem; }
+.em { color:var(--gold); }
+.warn { background:var(--red-dim); border-left:3px solid var(--red); padding:8px 12px; border-radius:0 var(--radius) var(--radius) 0; margin:10px 0; font-size:0.9rem; }
+ul { margin:6px 0 6px 18px; }
+li { font-size:0.93rem; margin:3px 0; }
+blockquote {
+  border-left:2px solid var(--gold-dim); padding:8px 14px; margin:12px 0;
+  color: var(--text-dim); font-style:italic; font-size:0.92rem;
+}
+hr { border:none; border-top:1px solid var(--border); margin:28px 0; }
+
+/* ── Copy button ── */
+.copy-bar { display:flex; justify-content:flex-end; margin-bottom:6px; }
+.copy-btn {
+  background:transparent; border:1px solid var(--border); color:var(--text-dim);
+  padding:4px 10px; border-radius:var(--radius); font-size:0.72rem; cursor:pointer;
+  min-height:30px;
+}
+.copy-btn:active { background:var(--surface2); color:var(--text); }
+.copy-btn.copied { color:var(--gold); border-color:var(--gold-dim); }
+
+/* ── Table ── */
+.table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:10px 0; }
+table { width:100%; border-collapse:collapse; font-size:0.88rem; min-width:500px; }
+th { background:var(--surface); color:var(--gold); padding:8px 10px; text-align:left; font-weight:600; border-bottom:2px solid var(--gold-dim); }
+td { padding:7px 10px; border-bottom:1px solid var(--border); vertical-align:top; }
+tr:nth-child(even) td { background:var(--surface); }
+
+/* ── Slot / 自定义槽位 ── */
+.slot-area { margin-top:40px; border-top:2px dashed var(--border); padding-top:28px; }
+.slot-area h2 { color:var(--gold); }
+.slot-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:14px; margin-bottom:14px; position:relative;
+}
+.slot-card h3 { margin-top:0; }
+.slot-card h3[contenteditable="true"],
+.slot-card p[contenteditable="true"] { outline:none; border-bottom:1px dashed var(--border); padding:2px 4px; margin:4px 0; min-height:1.4em; }
+.slot-card h3[contenteditable="true"]:focus,
+.slot-card p[contenteditable="true"]:focus { border-bottom-color:var(--gold); background:var(--surface2); }
+.slot-meta { display:flex; gap:8px; align-items:center; margin-bottom:8px; flex-wrap:wrap; }
+.slot-meta select, .slot-meta input {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text);
+  padding:4px 8px; border-radius:var(--radius); font-size:0.8rem; font-family:var(--font);
+}
+.slot-actions { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+.slot-actions button {
+  background:var(--surface2); border:1px solid var(--border); color:var(--text-dim);
+  padding:5px 12px; border-radius:var(--radius); font-size:0.78rem; cursor:pointer; min-height:34px;
+}
+.slot-actions button:active { background:var(--border); color:var(--text); }
+.slot-actions button.del { color:var(--red); border-color:var(--red-dim); }
+
+.add-btn {
+  background:var(--surface2); border:1px dashed var(--gold-dim); color:var(--gold);
+  padding:10px 18px; border-radius:var(--radius); font-size:0.9rem; cursor:pointer; width:100%; min-height:44px;
+}
+.add-btn:active { background:var(--border); }
+
+/* ── Toast ── */
+.toast {
+  position:fixed; bottom:24px; left:50%; transform:translateX(-50%);
+  background:var(--surface2); color:var(--gold); border:1px solid var(--gold-dim);
+  padding:8px 20px; border-radius:20px; font-size:0.82rem; z-index:99;
+  pointer-events:none; opacity:0; transition:opacity 0.25s;
+}
+.toast.show { opacity:1; }
+
+/* ── Offline banner ── */
+.offline-banner { display:none; background:var(--red-dim); color:var(--red); text-align:center; padding:6px; font-size:0.78rem; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width:5px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="logo">深渊圣约</span>
+  <span class="sub">整合世界观</span>
+  <button id="menuToggle" aria-label="目录">☰ 目录</button>
+  <button id="exportBtn" aria-label="导出">⬇ 导出</button>
+</header>
+
+<div class="layout">
+<aside id="sidebar">
+  <nav>
+    <a href="#s1">一、本源：两位神祇</a>
+    <a href="#s2">二、魔法的起源与原初教会</a>
+    <a href="#s3">三、信仰的分裂与博爱之神的诞生</a>
+    <a href="#s4">四、堕落：混沌信徒的渗透</a>
+    <a href="#s5">五、教会的三层结构</a>
+    <a href="#s6">六、教会的血脉：人员来源</a>
+    <a href="#s7">七、异变的真相：混沌之神的供养</a>
+    <a href="#s8">八、混沌裂隙与邪祟怪物</a>
+    <a href="#s9">九、邪祟结晶</a>
+    <a href="#s10">十、谎言构筑：双重世界的形成</a>
+    <a href="#s11">十一、被带走的人</a>
+    <a href="#s12">十二、信仰的扭曲：谎言的支柱</a>
+    <a href="#s13">十三、教会的润滑剂角色</a>
+    <a href="#s14">十四、时间线</a>
+    <a href="#slots" style="color:var(--gold);">✎ 自定义槽位</a>
+  </nav>
+</aside>
+
+<main>
+
+<!-- ═══════════ 一 ═══════════ -->
+<section id="s1">
+<div class="copy-bar"><button class="copy-btn" data-target="s1">📋 复制</button></div>
+<h1>一、本源：两位神祇</h1>
+<p>在世界诞生之初，只有混沌。</p>
+<p>秩序与创世之神在混沌中开辟稳定，祂用规则构筑大地、天空与生命，希望以有序取代无序，让万物远离虚无的吞噬。</p>
+<p>混沌与毁灭之神则是混沌本身的意志。祂致力于将世界拉回原初的无序状态。祂没有固定的形态——因为混沌即是无序，所以其神相是不可名状的扭曲之物，任何直视其本质的生命都将陷入疯狂。</p>
+<p>世界的本质即是熵增与熵减的对抗：秩序神致力于创造与维持，混沌神致力于毁灭与混乱。</p>
+<p>二者并无善恶之分，都是世界本源的一部分。只是对人类而言，秩序神意味着生存与繁荣，混沌神则意味着毁灭与疯狂。</p>
+<p>创世完成后，两位神祇便离开了这个世界，继续在无垠的虚空中进行各自的创造与毁灭。祂们并非围绕着这个世界运转——这个世界只是祂们无尽旅程中的一站。祂们留下的，是各自逸散在世界中的力量。</p>
+<p>混沌之神并非一个有意志、发号施令的神明。祂没有目标，没有计划，没有需要被"执行"的旨意。但混沌之力本身具有一种可被利用的特性：生命可以通过特定的仪式与心性修行，主动与混沌之力建立连接，从而汲取其破坏性的力量。这便是混沌信徒的力量来源——他们并非在"效忠"一位有意志的神明，而是主动选择靠近混沌，以获取力量。</p>
+<p>然而，混沌之力不可无害地驾驭。长期接触混沌之力，心智会逐渐被侵蚀，产生偏执、疯狂与自毁倾向。初期的侵蚀尚可维持表面的理性，但随着侵蚀加深，人最终将完全丧失自我，沦为混沌的傀儡，直至自我毁灭。每一个混沌信徒都坚信自己能驾驭这股力量而不被吞噬——但历史上从未有人真正逃脱这个结局。</p>
+</section>
+
+<!-- ═══════════ 二 ═══════════ -->
+<section id="s2">
+<div class="copy-bar"><button class="copy-btn" data-target="s2">📋 复制</button></div>
+<h1>二、魔法的起源与原初教会</h1>
+<p>秩序之神离去时，并未直接留下文字或圣典。祂留下的，是创世时逸散在世界中的力量。</p>
+<p>远古时代，大贤者们观察自然，从中领悟到了这份馈赠：</p>
+<p>有人观察阳光，看到它让万物生长、让四季轮转有序，于是悟出了光之魔法与治愈之力</p>
+<p>有人观察星月，分析潮起潮落与月相盈亏，发现其中蕴含着精密的秩序，于是悟出了星月魔法</p>
+<p>这些贤者逐渐意识到：魔法本不应是世间自然之物。能让凡人驾驭这等力量的，唯有创世时造物主逸散的能量。他们由此确信神明的存在。</p>
+<p>出于对这份馈赠的敬畏与感激，最初的教会应运而生。彼时，教会是统一的，众人共同信奉秩序之神，使用着原初的光之魔法与星月魔法。</p>
+</section>
+
+<!-- ═══════════ 三 ═══════════ -->
+<section id="s3">
+<div class="copy-bar"><button class="copy-btn" data-target="s3">📋 复制</button></div>
+<h1>三、信仰的分裂与博爱之神的诞生</h1>
+<p>千百年来，战争、分裂与权力争夺不断撕裂着这片大地。统一的教会也未能幸免。</p>
+<p>不同地区的教团逐渐发展出各自信奉的神明形象，魔法也随之分化演变——风、电、雷、火等新体系从原初的光与星月中衍生而出。每个教派都宣称自己掌握着真正的正统，都为各自信奉的神明编撰典籍、书写神话，以此证明自身的权威性，并以此为基础传授魔法。</p>
+<p>典籍的记载从此再无统一的结论。所谓教义，成了可以被权力涂抹改写的东西。</p>
+<p>在这个王国中占据主导地位的，是信奉"博爱之神"的教派。在公开的教义中，博爱之神为世间带来光明、治愈伤痛、博爱众生。教会凭借治愈魔法和光魔法赢得了广泛的信仰基础。</p>
+<p>一个值得玩味的锚点：原初魔法是光魔法和星月魔法。而博爱之神的魔法，恰恰也是光魔法。这究竟是巧合，还是意味着博爱之神比其它教派更接近正统？这是教会高层从不正面回答的问题，也是玩家可以追索的线索。</p>
+<div class="warn">然而，博爱之神的教义早已被政治侵蚀。在统治层的意志下，这部"教义"中赫然加入了鼓励地下平民与怪物战斗、以牺牲换取救赎的内容。<br><br>一个真正博爱的神，怎会让信徒在永无天日的地底与怪物厮杀至死？</div>
+<p>但这正是谎言最精巧之处——在教会长年的宣讲与洗脑下，地底的平民居然真诚地相信：自己是被博爱之神爱着的孩子，自己的战斗是神圣而伟大的，自己的牺牲将换来永恒的荣耀。</p>
+<p>矛盾越尖锐，真相揭穿时的冲击便越强烈。</p>
+</section>
+
+<!-- ═══════════ 四 ═══════════ -->
+<section id="s4">
+<div class="copy-bar"><button class="copy-btn" data-target="s4">📋 复制</button></div>
+<h1>四、堕落：混沌信徒的渗透</h1>
+<p>这个故事中真正的敌人，藏得更深。</p>
+<p>在教会分裂与战乱的历史进程中，一个隐秘的教团悄然形成。他们并非生来疯狂——恰恰相反，最初的混沌信徒是一群理性而野心勃勃的人。他们通过研究远古禁忌的知识，发现了与混沌之力建立连接的秘密。他们主动选择信仰混沌之神，以换取那足以摧毁一切的破坏力量。</p>
+<p>他们深知混沌会侵蚀心智，但他们中的每一个人都相信自己会是例外。初入混沌之道时，他们的理性几乎不受影响，能够在世人面前完美地隐藏自己的真实身份。这使得他们能够悄然渗透教会、接近权力。</p>
+<p>然而，侵蚀是不可逆的。随着接触混沌之力的时间增长，他们的心智逐渐扭曲——偏执加深，共情消褪，对毁灭的渴望超越了最初对力量的追求。侵蚀末期的人会彻底丧失理性，变得疯狂而自毁。</p>
+<p>正因如此，混沌教团形成了一个残酷的内在循环：高层中尚未完全侵蚀的成员，会从教会中层物色有资质的人——那些对现有秩序心怀不满、对权力或力量怀有隐秘渴望的人。他们先以更强大的魔法知识为诱饵，逐步培养其野心；当目标对正统光魔法的"温和"感到不满、开始渴望更具破坏力的力量时，才会被逐步引入混沌之道。在确认其心性与忠诚后，吸纳进入教团。新鲜血液从下方源源不断地补充，替代那些已经彻底沦为疯子的同僚。教团的运作，始终建立在"理性者驾驭疯狂者"的微妙平衡之上。</p>
+<p>混沌裂隙撕开后，混沌信徒从中获得了前所未有的混沌之力。以此为基础，他们开发出了传送法阵——以混沌破坏魔法撕裂空间本身，在两个地点之间开辟短暂的通道。这使得地面教会与深处地下的混沌祭坛之间能够秘密往来，无需经过地上的任何关卡。在裂隙开启之前，混沌信徒只能依靠物理方式在极深处挖掘通道，人员的秘密往来极为困难且缓慢。</p>
+<blockquote>May chaos take the world——这是他们无声的祷词，也是他们唯一的信条。</blockquote>
+</section>
+
+<!-- ═══════════ 五 ═══════════ -->
+<section id="s5">
+<div class="copy-bar"><button class="copy-btn" data-target="s5">📋 复制</button></div>
+<h1>五、教会的三层结构</h1>
+<p>如今的博爱之神教会，已非铁板一块。它内部存在着三层截然不同的真相：</p>
+
+<h2>第一层：底层信徒与基层神职人员</h2>
+<p>他们是教会最广大的组成部分。这些人真心相信自己正在行善，正在替博爱之神守护众生。他们用治愈魔法救治伤者，为地下民众主持日常的祈祷与慰藉，从未怀疑过教义的正当性。</p>
+
+<h2>第二层：教会中层——秩序的维护者</h2>
+<p>这些人知晓教会与统治层的真实关系。他们清楚：所谓"博爱之神的地下试炼"，不过是维持社会稳定的谎言；教会存在的真正功能，是充当统治阶级与底层之间的润滑剂，用信仰化解愤怒，用邪祟结晶与赎罪凭证消解反抗。</p>
+<p>他们或许曾经有过不安，但最终选择了沉默。他们是"唱红脸的人"。他们对自己的定位心知肚明——自己之所以能安然生活在地面上，正是因为地下的"守护者"替他们挡住了怪物。</p>
+<p>中层知晓"被侵蚀者"的处理流程：症状较轻者被观察后送回，症状严重者被"处理"。在他们的认知中，严重侵蚀者被移交给了统治阶级派来的特派专员——这些人据说是王室直属的处置机构。中层不知道的是，这些所谓的"特派专员"本身就是混沌信徒在统治阶级中安插的人，而那些被移交的严重侵蚀者，最终被转运至地下深处的混沌祭坛，成为了献祭的祭品。中层也是被利用的人。</p>
+
+<h2>第三层：教会顶层——混沌信徒</h2>
+<p>这是隐藏在最深处的真正核心。他们从教会历史的某个节点开始渗透，经过数代人的经营，已经悄然爬到了教会权力的至高点。</p>
+<p>他们信奉的不是博爱之神，甚至不是秩序之神。他们信奉的是混沌与毁灭之神。他们的一切行动，都指向一个终极目标：扩大混沌的力量，让世界重归无序。</p>
+</section>
+
+<!-- ═══════════ 六 ═══════════ -->
+<section id="s6">
+<div class="copy-bar"><button class="copy-btn" data-target="s6">📋 复制</button></div>
+<h1>六、教会的血脉：人员来源</h1>
+<p>三层结构的稳定性并非仅靠制度维持。真正让各层人员"困在自己的位置上"的力量，是他们的出身。</p>
+<p>教会的多数职位在历史上逐渐世袭化，形成了大量的"教会世家"——教士结婚生子，子女自幼在教会中长大，接受完整的宗教教育，顺理成章地成为下一代教士。经过数代，教会家族的数量已远超外来入教者。对这些人而言，教会的建筑是家，教义是常识，祈祷是呼吸。他们并非被欺骗，而是从未被给予"知道真相的机会"——真相根本不在他们的世界中存在。</p>
+
+<h3>底层来源</h3>
+<p>底层神职人员大多出身于教会世家与孤儿收养。教会系统长期收养阵亡守护者的遗孤，由修女抚养长大。这些孩子对教会的感恩发自骨髓，是信仰最纯净、最不可能产生怀疑的人群。负责登记结晶的那位修女，便出身于孤儿收养——她的一切都是教会给的，她也愿意为教会奉献一切。</p>
+
+<h3>中层来源</h3>
+<p>中层的主要来源是教会世家中随着家族地位上升而接触到更多信息的后裔，以及贵族与富商送入教会的非继承人子女。对世家出身的中层而言，维护教会不仅是政治计算，更是家族荣誉——背叛教会意味着背叛父母、祖先和子女。对贵族子弟而言，教会的职位是体面的避难所，知晓真相后的沉默是维持这份体面的代价。两者都有一千个理由保持沉默，没有一个是光荣的，但每一个都是人之常情。</p>
+
+<h3>地下晋升者</h3>
+<p>地下晋升者是一个极为稀少但重要的补充渠道。地下社会中被发现拥有强光魔法天赋的人，偶尔会被教会选中，带至地面培养为神职人员。这是双重世界中唯一的合法上升通道。被选中者一旦离开地下，便永远不会再被送回——他们在地面的教会设施中接受完整的宗教教育，被灌输"地下的人民同样是伟大的，你也可以尽你所能来帮助他们"之类的初级教会观念。正因如此，他们无需像轻度侵蚀者那样被消除记忆：他们从不知道地面的安逸生活对地下而言是一种背叛，他们只知道自己是被博爱之神从黑暗中拯救的孩子。被选中者通常成为信仰最狂热的教士——因为他们亲身经历过"被教会从地底拯救"。他们不知道的是，这种选拔本身也是控制手段：天才是最危险的火种，将其抽离地下，地下就少了一个潜在的领导者。</p>
+
+<blockquote>这栋三层建筑之所以屹立百年不倒，正是因为踏入每一层门槛的人，都带着无法回头的理由——血缘、恩情、利益，或三者叠加。</blockquote>
+</section>
+
+<!-- ═══════════ 七 ═══════════ -->
+<section id="s7">
+<div class="copy-bar"><button class="copy-btn" data-target="s7">📋 复制</button></div>
+<h1>七、异变的真相：混沌之神的供养</h1>
+<p>混沌信徒占据教会顶层后，并未立即行动。他们花了约十三年的时间，在地下深处的秘密据点中不断试验——寻找能大规模引动混沌之力的方法。起初的尝试收效甚微，直到他们发现了献祭的真相：摧毁生命、撕裂秩序的行为，本身就能与混沌的本质产生共振。这一发现，让他们找到了一条直接撬动混沌力量的路径。</p>
+<p>当统治层的政权因腐败与无能而摇摇欲坠时，混沌信徒主动请缨。</p>
+<p>他们向王室提出了一个秘密方案：通过禁忌的仪式，可以召唤混沌之神的力量——那足以摧毁一切敌人的、绝对的破坏力，可以用来巩固岌岌可危的政权。</p>
+<p>王室同意了。他们并不真正理解自己接触的是什么力量，只知道这能让他们继续坐在王座上。自那以后，王室始终维持着与混沌信徒的秘密合作——表面风光依旧，背地里持续为献祭提供庇护与资源。混沌信徒对王位并无兴趣，他们需要的只是一个不会干涉其计划的政权。</p>
+<p>混沌信徒在大地的极深处——寻常矿道远不能及的深度——挖掘了秘密的祭坛。在那里，他们举行了第一次献祭仪式。大量血肉被献上，生命被摧毁，秩序被撕裂——而这种毁灭行为本身就与混沌之神的本质产生共振，将混沌的力量引流入这个世界。</p>
+<p class="em">裂隙被撕开了。</p>
+<p>如今，混沌信徒以混沌破坏魔法构建了传送法阵——撕裂空间本身，在两地之间开辟短暂通路。这使得地面教会与地下祭坛之间能够秘密往来，教会上层无需公开出入地下，便可将"材料"直接传送至祭坛所在。</p>
+</section>
+
+<!-- ═══════════ 八 ═══════════ -->
+<section id="s8">
+<div class="copy-bar"><button class="copy-btn" data-target="s8">📋 复制</button></div>
+<h1>八、混沌裂隙与邪祟怪物</h1>
+<p>混沌裂隙一旦撕开，便无法完全关闭。</p>
+<p>裂隙本身并不会源源不断地产生怪物。它更像是一道伤口——平日里保持着相对沉寂的状态，只有少量怪物从裂隙中逸出。地下的守护者日常承担的，正是类似于边境驻军的防御职责：清除零星逸出的怪物，防止它们扩散到地面。</p>
+<p>然而，每当混沌信徒在裂隙前举行高强度的献祭仪式，向裂隙注入大量的死亡与血肉时，混沌之力便会被剧烈激发。在那段时间里，怪物的生成速度会暴增，对地下防线造成巨大压力。</p>
+<div class="warn">
+<p>这些怪物曾经是人。但并非在战斗中接触怪物就会变成怪物——只有被混沌信徒献祭的人，才会在仪式中被混沌之力彻底扭曲，化为不可名状的怪物。血肉与肢体以不符合常理的方式拼接，直视它们会让人精神崩溃。它们的存在本身就是秩序被混沌侵蚀的证明。</p>
+</div>
+<p>守护者长期与怪物战斗不会直接导致变异。真正的危险在于精神层面：频繁目睹那些不可名状的扭曲之物，心智会逐渐被混沌的印记所侵蚀。</p>
+</section>
+
+<!-- ═══════════ 九 ═══════════ -->
+<section id="s9">
+<div class="copy-bar"><button class="copy-btn" data-target="s9">📋 复制</button></div>
+<h1>九、邪祟结晶</h1>
+<p>当被混沌污染的怪物被秩序之力（如魔法）消灭时，秩序与混沌的冲突会在怪物残骸中凝结出一种特殊的结晶——教会称之为<span class="em">"邪祟结晶"</span>。</p>
+<p>这种结晶的本质，是怪物生前作为秩序造物所残留的最后核心。它并非什么肮脏之物，恰恰相反——它是混沌污染之下，一个人身为秩序造物的最后证明。不妨这样理解：它是一个被混沌吞噬的灵魂，在躯壳被消灭后于世间留下的最后实体。</p>
+
+<h3>教会的话术</h3>
+<p>"邪祟"二字，让民众将怪物与"不洁"绑定，产生"消灭怪物即是铲除邪祟"的心理映射。</p>
+<p>刻意避免使用"灵魂"一词，是为了防止民众联想到活人——防止任何人产生"怪物曾经可能是人"的联想。</p>
+
+<h3>收集与记录</h3>
+<p>每一场战斗结束后，怪物残骸中凝结的结晶会被专人收集。负责这项工作的是一位修女。她认真记录每一枚结晶的来源与数量，从不懈怠。她真心相信自己在做一件神圣的工作——登记那些被净化的邪祟，见证信徒的功绩。她将这些结晶小心封存、造册，然后定期上交。</p>
+<p>她并不知道这些结晶真正的来源。她不知道每一枚"邪祟结晶"，都是一个被混沌吞噬的人类留下的最后痕迹。</p>
+<p>修女在名册上记录每位守护者上交的结晶数量。当某人的累计数量达到门槛，她便为其举行凭证授予仪式——这是地下居民一生中最神圣的时刻。</p>
+
+<h3>结晶的流转</h3>
+<p>教会底层接到结晶后，以"销毁不洁之物"为名，将其集中上交至教会高层。这是底层神职人员眼中的常规流程——他们从不质疑。然而，这个流程中存在一个不能言说的秘密：</p>
+<p>邪祟结晶无法被光魔法或任何秩序系魔法摧毁。因为结晶的本质是秩序造物的核心，它与秩序魔法同源——<span class="em">秩序不能消灭秩序</span>。</p>
+<p>教会中偶尔有中层教士出于好奇或怀疑，尝试过用光魔法销毁这些结晶，无一例外地失败了。但在教会长年的妖魔化宣传下——"邪祟"二字让结晶在教士心中与不洁之物绑定——多数人本来就不愿主动触碰。而那些尝试失败的人，也只会归因于自己魔法能力不足，反而对能够"处理"这些结晶的上级产生敬畏。</p>
+<p>真正能摧毁这些结晶的，只有混沌破坏魔法。</p>
+
+<h3>凭证的制造</h3>
+<p>然而，混沌信徒并未选择摧毁这些结晶。他们将收缴的结晶注入混沌之力，改造为一种黑色的魔法造物——形态扭曲而冰冷，表面散发着微弱的混沌气息。在这黑色造物的中心，镶嵌着一颗黄色的宝石。这颗宝石是一件光魔法容器：当修女在凭证授予仪式上将守护者的血液与光魔法注入宝石时，两种力量在宝石中融合，与持有者的灵魂建立生命连接。而包裹在外的黑色混沌材质，则暗中将这一连接转化为灵魂锚定信号。</p>
+<p>黄色宝石并非天然之物。它是一种光魔法造物，与地下洞穴中提供照明与作物生长的"光核"同源——两者都出自混沌信徒之手。混沌信徒并非只会混沌魔法：他们大多原本就是光魔法的修行者，只是在追寻更强大力量的过程中转向了混沌之道。为地下制造光核、为凭证制造宝石，于他们而言不过是早已熟稔的技艺。然而讽刺的是，他们施予地下光明的同一双手，也在为每一个被光照亮的人制造灵魂的牢笼。</p>
+<blockquote>这便是赎罪凭证的真实形态——一个秩序的内核（宝石中的生命连接）被混沌的外壳（黑色结晶造物）所包裹。两种本源对立的力量，因混沌外壳主动包裹秩序内核而得以共存。这本身就是一个残酷的隐喻：被混沌吞噬的人，他最后的秩序痕迹，成为了捕捉自己灵魂的牢笼。</blockquote>
+<p>凭证一旦制成，这个人作为秩序造物的一切痕迹便已被混沌彻底包裹和转化，再无恢复的可能。</p>
+
+<h3>被封锁的知识</h3>
+<p>如果结晶尚未被注入混沌之力——即尚未被改造成凭证——且由光魔法能力足够强大的施法者施以高深的秩序魔法，是有可能将结晶逆向还原的。<span class="em">摧毁是破坏秩序，这违背了秩序的本质；还原则是恢复一个人原初的秩序形态，恰恰是秩序魔法最擅长的领域。</span>但这需要极其强大的光魔法造诣，且必须在结晶被改造成凭证之前完成。</p>
+<p>混沌信徒之所以将每一枚收缴的结晶都立即改造成凭证，正是为了确保所有受害者都绝无恢复的可能——同时，将受害者最后的痕迹，转化为狩猎下一个灵魂的工具。</p>
+</section>
+
+<!-- ═══════════ 十 ═══════════ -->
+<section id="s10">
+<div class="copy-bar"><button class="copy-btn" data-target="s10">📋 复制</button></div>
+<h1>十、谎言构筑：双重世界的形成</h1>
+<p>混沌裂隙的真相被彻底封锁。</p>
+<p>统治层与教会联手对外宣称：地下怪物的涌现是"不明原因的天灾"。以此为借口，他们勒令底层人民挖掘地下防御工事，并将其迁入地下长期驻守。</p>
+
+<h2>地上世界</h2>
+<p>贵族、高阶教士和富商在阳光之下安然生活。他们中的部分人知晓真相，但选择沉默——因为地下的"守护者"替他们挡住了怪物。</p>
+<p>地上的人——包括教会成员、王室贵族、富商及其仆从——几乎无一例外地惧怕一件事：被送去地下。当他们中的某人因失势、获罪或其它原因被放逐到地下时，地下的居民会被或有或无地告知此人的身份——他是"上面的人"。于是，这些被放逐者往往会被地下厌恶统治阶级的人送去最前线，直面最凶险的战斗。几乎无人能够幸存。即便他们知道地面的真相，也来不及告知任何人；即使他们开口，也不会有人相信一个"上面的人"的话。</p>
+<p>地上与地下之间的信息流通，由此被彻底切断。</p>
+
+<h2>地下世界</h2>
+<p>底层人民在永无天日的洞穴中度过一生，驻守着防线，与裂隙中逸出的怪物日夜战斗。有人在黑暗中出生，在黑暗中战斗，在黑暗中死去，从未见过阳光。对于地底居民而言，回到地面是此生不可能的奢望——他们被要求终生驻守，直至死亡。</p>
+<p>然而，地下社会并非全靠地面供养。光魔法为地下带来了光源，使作物能够在洞穴中生长。治愈魔法维持着居民的健康。经过数十年的经营，地下已经建立起基本的自给自足体系，甚至每年还需向地面缴纳粮食作为赋税——这也是地下居民对统治者不满的根源之一：他们流血战斗、在暗无天日的地底自耕自食，却还要养活地面上的闲人。</p>
+<p>受限于地下空间，果树无法在洞穴中种植。因此，水果在地下是极为罕见的奢侈品。教会每月慰问时偶尔带来的新鲜苹果，便成为了地下人民眼中"教会爱我们"的最直接证据。一个苹果，比一百次说教更能收买人心。</p>
+<p>地下的人口依靠自然繁衍维系——第一代被迁移的平民在地下生儿育女，他们的后代从未见过阳光，在黑暗中出生，在黑暗中成长，在黑暗中接过父辈的武器。三代人的封闭繁衍，使地下社会形成了事实上的隔离种群：对他们而言，地面只是传说，地下才是世界的全部。偶有地面之人因失势获罪被放逐至地下，但作为外来者，他们几乎全部在短期内死于前线，极少能在地下留下血脉。</p>
+<p>社会被彻底割裂。矛盾日益激增，但教会站在中间充当润滑剂。</p>
+</section>
+
+<!-- ═══════════ 十一 ═══════════ -->
+<section id="s11">
+<div class="copy-bar"><button class="copy-btn" data-target="s11">📋 复制</button></div>
+<h1>十一、被带走的人</h1>
+<p>与怪物战斗，不仅是血肉的搏杀，更是心智的侵蚀。</p>
+<p>长期暴露在混沌怪物的影响下——反复目睹那些不可名状的扭曲之物——有些人的心智会逐渐被混沌侵蚀。他们开始胡言乱语，看见不存在的东西，眼中映出不可名状的景象。在地底的规则中，这样的人已几近死亡。</p>
+<p>当有人被判定为"心智被邪祟侵蚀"，教会的人员便会下来，将此人带走。</p>
+<p>教会对地下人民的说法是：这些被侵蚀的可怜人，将被送往神圣的教会，在那里接受专门的仪式来驱除邪祟，在安详中离去。</p>
+<p>真相远比这个说法复杂——也远比它残忍：</p>
+
+<h3>轻度侵蚀者</h3>
+<p>被带走的人会被教会中层观察。其中确实有一部分人，侵蚀程度较轻。他们在教会的监护下逐渐恢复，混沌对心智的影响慢慢消退。当确认其已恢复后，教会会将其送回地下。</p>
+<p>但对于这些被送回的人，记忆是被筛选过的——他们只记得自己坠入了无尽的混沌，感受到无边的寒冷与黑暗，然后，教会像一束光一样出现，将自己从寒冷中解救。如果恢复期间他们见到了地面的场景或接触到了不该知晓的信息，这段记忆会被魔法消除。</p>
+<p>因此，被送回的人对教会感恩戴德。他们成为了信仰最坚定的见证者——他们亲身经历过"被博爱之神从混沌中拯救"的神迹。他们的证词让地下居民对教会更加信任、更加尊敬。</p>
+
+<h3>重度侵蚀者</h3>
+<p>而那些侵蚀程度严重、已无法恢复的人——教会中层启动"移交程序"，将严重侵蚀者交由统治阶级派来的特派专员接管。中层以为这些人被带去了王室的专门处置机构——或许是被处决，或许是被关押在某个秘密牢狱。中层并不深究。</p>
+<div class="warn">
+<p>他们不知道的是：那些"特派专员"本身就是混沌信徒安插在统治阶级中的人。严重侵蚀者通过秘密传送法阵被直接转移至地下深处的混沌祭坛。</p>
+<p>对于混沌信徒而言，被混沌深度侵蚀的人正是最合适的祭品——他们的生命已经在秩序与混沌的边界上摇摆，摧毁这样的生命，激发的混沌共振更为强烈。</p>
+</div>
+<p>那些未能回来的人，最终都化作了献祭仪式上的血肉，成为了供养混沌裂隙的养料。而教会对地下人民的说法始终如一：他们被送往了神的国度，在安详中离去。</p>
+<p>没有人知道真相。</p>
+</section>
+
+<!-- ═══════════ 十二 ═══════════ -->
+<section id="s12">
+<div class="copy-bar"><button class="copy-btn" data-target="s12">📋 复制</button></div>
+<h1>十二、信仰的扭曲：谎言的支柱</h1>
+<p>博爱之神教会的公开形象仍是"人民的庇护者"。为维持谎言的运转，教会建立了两根核心支柱：</p>
+
+<h2>支柱一：思想控制</h2>
+<blockquote>"任何怀疑地面真相的言论，都是对神的亵渎。"</blockquote>
+<p>质疑"地下是神的试炼场"者，质疑"教会爱民"者，传播"地上存在谎言"者——都将被以异端之名惩处。一个能独立思考的灵魂，是统治层最深的恐惧。</p>
+
+<h2>支柱二：邪祟结晶与赎罪凭证</h2>
+<blockquote>"每杀死一只地下怪物，就能从怪物残骸中取得一枚'邪祟结晶'。集齐一定数量，便可向教会兑换一张进入极乐世界的'赎罪凭证'。"</blockquote>
+<p>这套精巧的制度让无尽的战斗有了神圣的意义：</p>
+<ul>
+  <li>修女认真记录每一枚结晶的收缴与每个人的累计数量。当某位守护者的数量达到门槛，修女会为其举行凭证授予仪式——这是地下居民一生中最受瞩目的时刻。</li>
+  <li>积累足够结晶即可兑换赎罪凭证，据说能确保死后直入神国。</li>
+  <li>教会每季公布功勋榜，让底层之间彼此竞争，而非团结。</li>
+</ul>
+<p>战斗从诅咒变成了"铲除邪祟的神圣天职"，牺牲从悲剧变成了"荣耀"。这让地底居民不再追问"为何而战"，而是专注于"如何更高效地战"。牺牲变得理所当然。</p>
+
+<h3>凭证的真实形态</h3>
+<p>每一枚凭证由两部分构成：外层是黑色的魔法造物——由邪祟结晶注入混沌之力改造而成，触感冰冷，形态扭曲；中心镶嵌着一颗黄色的宝石，散发着微弱的暖光。在普通守护者眼中，这不过是教会发放的圣物；没有人知道黑色材质来自他们亲手交上去的结晶，也没有人知道那颗暖黄色的宝石才是唯一属于秩序的部分。</p>
+<p>凭证授予仪式上，守护者需在凭证的黄色宝石上滴入自己的一滴血液。修女以光魔法将血融入宝石之中——她深信这是"让博爱之神记住此人之名"的神圣仪式。从此，凭证与持有者建立了一种微弱的生命连接。修女只知道自己向宝石注入了光魔法，她不知道宝石外侧的黑色材质会将这份连接悄然转化为另一种东西。</p>
+<p>这种连接是真实可感的。凭证在持有者健康时保持温热，在持有者受伤时微微发凉。战前抚摸凭证感受它的体温，是许多守护者的习惯。如果一位守护者受了重伤、生命垂危，他怀中的凭证会变得冰冷——战友们触摸凭证便知他时日无多。这种真实不虚的神圣体验，让地下的每一个人都深信凭证的力量，无人质疑。</p>
+<p>而当持有者死亡的那一刻，凭证中央的黄色宝石会自行碎裂，化为光点消散。在目击者眼中，这是灵魂被博爱之神接引、升入神国的神迹。无数人见过这一幕——战友在战场上倒下，怀中的凭证化作暖光升腾散去。没有人怀疑它的真实性，因为它就是真实的。</p>
+
+<h3>真相</h3>
+<div class="warn">
+<p>宝石碎裂后，外层包裹的黑色混沌材质随即化为黑色粉末，无声消散，不留痕迹——它的使命已然完成。而它捕获的那股光魔法脉冲——这并非普通的魔法光芒，而是一个精准的灵魂锚定信号。凭证与持有者之间的生命连接被设计为：一旦断裂（持有者死亡），便释放出独特的魔法脉冲。这个脉冲被地下深处的混沌传送法阵捕获，持有者的灵魂位置与痕迹被精准传输至祭坛。</p>
+<p>混沌信徒手中因此拥有了一份精确的灵魂名册——每一个持有凭证的死者，其灵魂都能被完全定位和捕获。他们的献祭效率因此远比随机献祭高出数倍。带着凭证含笑死去的人，他们的灵魂被捕获得最为完整——因为他们在死亡时毫无抵抗，对博爱之神的信任让他们心甘情愿地面向那道宝石碎裂时绽放的暖光。</p>
+</div>
+<blockquote>
+<p>凭证确实是神圣的。它确实连接了一个人的生命与灵魂。它确实在死亡时将人引向某个地方。凭证的每一个承诺——温暖、连接、死亡时的光芒——都是真实的。</p>
+<p class="em">只是引向的不是天国。</p>
+</blockquote>
+</section>
+
+<!-- ═══════════ 十三 ═══════════ -->
+<section id="s13">
+<div class="copy-bar"><button class="copy-btn" data-target="s13">📋 复制</button></div>
+<h1>十三、教会的润滑剂角色</h1>
+<p>在这种割裂的秩序中，教会扮演着精细的维稳角色：</p>
+<ul>
+  <li><b>定期慰问：</b>每月向地下输送新鲜水果与药品。在地下自给自足的经济中，水果是唯一无法自行生产的奢侈品——一个苹果便足以让人民感受到"教会的恩典"。这份稀缺的甜味比任何教义都更能收买人心。</li>
+  <li><b>因果宣讲：</b>神父反复强调"此生的苦难是神明对你们的信任"，将压迫转化为身份认同。</li>
+  <li><b>凭证授予：</b>修女为达标的守护者举行凭证授予仪式。她不知道自己滴入血液、融入光魔法的神圣仪式，正在为一个灵魂打上追踪标记。她真心相信自己在帮助一个孩子获得博爱之神的眷顾——而她的善良，正是这架机器中最不可替代的零件。</li>
+  <li><b>侵蚀者处置：</b>将心智被侵蚀者带走观察，轻症者消除相关记忆后送回，重症者通过假的"王室专员"移交至地下深处的混沌信徒手中作为祭品。送回者因那段"被从混沌中拯救"的经历而成为信仰最坚定的见证者，进一步巩固了民众对教会的信任。</li>
+  <li><b>荣耀叙事：</b>在教会编年史中，所有死者都被记载为"微笑着回归神国"，抹杀个体的痛苦与反抗。</li>
+</ul>
+<blockquote>一面是偶尔带来新鲜苹果的表面善举，一面是将人民永远困于地下的无形枷锁。一面是为被侵蚀者带来"从混沌中被拯救"的温暖回忆，一面是将无法恢复者送入献祭的血腥真相。一面是为守护者制作真实的灵魂信物，一面是信物背后的猎物标记。</blockquote>
+</section>
+
+<!-- ═══════════ 十四 ═══════════ -->
+<section id="s14">
+<div class="copy-bar"><button class="copy-btn" data-target="s14">📋 复制</button></div>
+<h1>十四、时间线</h1>
+<div class="table-wrap">
+<table>
+<thead><tr><th>时间节点</th><th>事件</th></tr></thead>
+<tbody>
+<tr><td>创世之初</td><td>秩序之神与混沌之神先后完成创造与毁灭，离开世界继续各自的旅程，留下逸散的力量</td></tr>
+<tr><td>远古时期</td><td>大贤者领悟光魔法与星月魔法，原初教会成立</td></tr>
+<tr><td>千百年来</td><td>教会分裂，魔法分化，博爱之神教派在王国中占据主导</td></tr>
+<tr><td>数代之前</td><td>混沌信徒开始渗透教会，理性尚存的早期信徒逐步向权力高层爬升</td></tr>
+<tr><td>约百年前</td><td>混沌信徒已占据教会顶层，此后十三年间在地下秘密试验，寻找引动混沌之力的方法，最终发现献祭的力量</td></tr>
+<tr><td>约九十年前</td><td>统治阶级政权摇摇欲坠，混沌信徒主动请缨，献上秘密方案</td></tr>
+<tr><td>约八十七年前</td><td>首次献祭仪式在地下深处举行，混沌裂隙撕开，怪物首次出现</td></tr>
+<tr><td>同年</td><td>统治层与教会联手封锁真相，宣称"不明原因的天灾"；底层平民被勒令迁移至地下，防线开始建立</td></tr>
+<tr><td>此后数十年</td><td>地下利用光魔法建立自给自足体系，防线逐步完善，地下社会形成，双重世界固化</td></tr>
+<tr><td>当前</td><td>距离怪物首次出现已过八十七年，约三代人的时间</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<!-- ═══════════ 自定义槽位 ═══════════ -->
+<section id="slots" class="slot-area">
+<h1>✎ 自定义槽位</h1>
+<p style="color:var(--text-dim);font-size:0.88rem;">在此添加角色设定、支线剧情、新增设定等内容。所有内容自动保存在浏览器中，不会丢失。</p>
+<div id="slotList"></div>
+<button class="add-btn" id="addSlot">＋ 新增槽位</button>
+</section>
+
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<!-- ═══════════ SCRIPT ═══════════ -->
+<script>
+/* ── Copy ── */
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const section = document.getElementById(btn.dataset.target);
+    const text = section.innerText.replace(/📋 复制\n?/g,'').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ 已复制'; btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '📋 复制'; btn.classList.remove('copied'); }, 1500);
+    }).catch(() => { toast('复制失败，请手动选择文字'); });
+  });
+});
+
+/* ── Toast ── */
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+/* ── Mobile menu ── */
+const sidebar = document.getElementById('sidebar');
+const menuToggle = document.getElementById('menuToggle');
+menuToggle.addEventListener('click', () => {
+  if (sidebar.style.display === 'block') {
+    sidebar.style.display = 'none';
+  } else {
+    sidebar.style.display = 'block';
+    sidebar.style.position = 'fixed'; sidebar.style.top = '48px'; sidebar.style.left = '0';
+    sidebar.style.width = '100%'; sidebar.style.maxHeight = '70vh';
+    sidebar.style.background = 'var(--bg)'; sidebar.style.zIndex = '20';
+    sidebar.style.overflowY = 'auto'; sidebar.style.padding = '12px 20px';
+    sidebar.style.borderBottom = '2px solid var(--border)';
+  }
+});
+document.addEventListener('click', (e) => {
+  if (!sidebar.contains(e.target) && e.target !== menuToggle && sidebar.style.display === 'block') {
+    sidebar.style.display = 'none';
+  }
+});
+
+/* ── Highlight current nav ── */
+const navLinks = sidebar.querySelectorAll('a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.classList.remove('active'));
+      const link = sidebar.querySelector(`a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+document.querySelectorAll('section[id]').forEach(s => observer.observe(s));
+
+/* ── Custom Slots – localStorage ── */
+const STORAGE_KEY = 'abyss_covenant_slots';
+
+function loadSlots() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch { return []; }
+}
+function saveSlots(slots) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(slots));
+}
+
+function renderSlots() {
+  const slots = loadSlots();
+  const container = document.getElementById('slotList');
+  container.innerHTML = '';
+  slots.forEach((slot, i) => {
+    const card = document.createElement('div');
+    card.className = 'slot-card';
+    card.innerHTML = `
+      <div class="slot-meta">
+        <select data-i="${i}" class="slot-type">
+          <option value="角色" ${slot.type==='角色'?'selected':''}>角色</option>
+          <option value="剧情" ${slot.type==='剧情'?'selected':''}>剧情</option>
+          <option value="设定" ${slot.type==='设定'?'selected':''}>设定</option>
+          <option value="笔记" ${slot.type==='笔记'?'selected':''}>笔记</option>
+        </select>
+      </div>
+      <h3 contenteditable="true" data-i="${i}" data-field="title" placeholder="标题…">${slot.title||''}</h3>
+      <p contenteditable="true" data-i="${i}" data-field="body" placeholder="内容…">${slot.body||''}</p>
+      <div class="slot-actions">
+        <button class="copy-slot" data-i="${i}">📋 复制此条</button>
+        <button class="del" data-i="${i}">删除</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+  bindSlotEvents();
+}
+
+function bindSlotEvents() {
+  document.querySelectorAll('.slot-type').forEach(sel => {
+    sel.addEventListener('change', (e) => {
+      const i = parseInt(e.target.dataset.i);
+      const slots = loadSlots();
+      if (slots[i]) { slots[i].type = e.target.value; saveSlots(slots); }
+    });
+  });
+  document.querySelectorAll('[contenteditable="true"]').forEach(el => {
+    el.addEventListener('blur', (e) => {
+      const i = parseInt(e.target.dataset.i);
+      const field = e.target.dataset.field;
+      const value = e.target.innerText.trim();
+      const slots = loadSlots();
+      if (slots[i]) {
+        if (field === 'title') slots[i].title = value;
+        else slots[i].body = value;
+        saveSlots(slots);
+      }
+    });
+  });
+  document.querySelectorAll('.copy-slot').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const i = parseInt(btn.dataset.i);
+      const slots = loadSlots();
+      const s = slots[i];
+      if (!s) return;
+      const text = `[${s.type||'笔记'}] ${s.title||''}\n${s.body||''}`;
+      navigator.clipboard.writeText(text).then(() => toast('已复制')).catch(() => toast('复制失败'));
+    });
+  });
+  document.querySelectorAll('.del').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!confirm('确定要删除这个槽位吗？')) return;
+      const i = parseInt(btn.dataset.i);
+      const slots = loadSlots();
+      slots.splice(i, 1);
+      saveSlots(slots);
+      renderSlots();
+      toast('已删除');
+    });
+  });
+}
+
+document.getElementById('addSlot').addEventListener('click', () => {
+  const slots = loadSlots();
+  slots.push({ type:'笔记', title:'', body:'' });
+  saveSlots(slots);
+  renderSlots();
+  toast('已添加新槽位');
+});
+
+renderSlots();
+
+/* ── Export ── */
+document.getElementById('exportBtn').addEventListener('click', () => {
+  let out = '# 深渊圣约 · 世界观设定\n\n';
+  // Fixed sections
+  for (let i = 1; i <= 14; i++) {
+    const s = document.getElementById('s' + i);
+    if (!s) continue;
+    const text = s.innerText.replace(/📋 复制\n?/g, '').trim();
+    out += text + '\n\n---\n\n';
+  }
+  // Custom slots
+  const slots = loadSlots();
+  if (slots.length) {
+    out += '# 自定义槽位\n\n';
+    slots.forEach(s => {
+      out += `## [${s.type||'笔记'}] ${s.title||'无标题'}\n\n${s.body||''}\n\n`;
+    });
+  }
+  const blob = new Blob([out], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = '深渊圣约_设定.txt';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('已导出 TXT');
+});
+</script>
+</body>
+</html>
